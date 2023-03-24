@@ -45,7 +45,7 @@ Index: plymouth-22.02.122/themes/pika-text/pika-text.plymouth.in
 +title=Pika Plymouth
 +black=0x2c001e
 +white=0xffffff
-+brown=0xff4012
++brown=0xffe500
 +blue=0x988592
 Index: plymouth-22.02.122/themes/pika-text/Makefile.am
 ===================================================================
