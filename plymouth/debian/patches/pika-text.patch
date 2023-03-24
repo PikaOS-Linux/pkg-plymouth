@@ -1,5 +1,5 @@
-Description: Add ubuntu-text splash plugin and theme
-Author: Scott James Remnant <scott@ubuntu.com>
+Description: Add pika-text splash plugin and theme
+Author: Scott James Remnant <scott@pika.com>
 Forwarded: not-needed
 Last-Update: 2011-01-21
 
@@ -11,7 +11,7 @@ Index: plymouth-22.02.122/configure.ac
             src/plugins/splash/Makefile
             src/plugins/splash/fade-throbber/Makefile
             src/plugins/splash/tribar/Makefile
-+           src/plugins/splash/ubuntu-text/Makefile
++           src/plugins/splash/pika-text/Makefile
             src/plugins/splash/text/Makefile
             src/plugins/splash/details/Makefile
             src/plugins/splash/space-flares/Makefile
@@ -19,7 +19,7 @@ Index: plymouth-22.02.122/configure.ac
             themes/spinner/Makefile
             themes/script/Makefile
             themes/bgrt/Makefile
-+           themes/ubuntu-text/Makefile
++           themes/pika-text/Makefile
             images/Makefile
  	   scripts/plymouth-generate-initrd
  	   scripts/plymouth-populate-initrd
@@ -29,31 +29,31 @@ Index: plymouth-22.02.122/themes/Makefile.am
 +++ plymouth-22.02.122/themes/Makefile.am
 @@ -1,2 +1,2 @@
 -SUBDIRS = spinfinity fade-in text details solar glow script spinner tribar bgrt
-+SUBDIRS = spinfinity fade-in text details solar glow script spinner tribar bgrt ubuntu-text
++SUBDIRS = spinfinity fade-in text details solar glow script spinner tribar bgrt pika-text
  MAINTAINERCLEANFILES = Makefile.in
-Index: plymouth-22.02.122/themes/ubuntu-text/ubuntu-text.plymouth.in
+Index: plymouth-22.02.122/themes/pika-text/pika-text.plymouth.in
 ===================================================================
 --- /dev/null
-+++ plymouth-22.02.122/themes/ubuntu-text/ubuntu-text.plymouth.in
++++ plymouth-22.02.122/themes/pika-text/pika-text.plymouth.in
 @@ -0,0 +1,11 @@
 +[Plymouth Theme]
-+Name=Ubuntu Text
-+Description=Text mode theme based on ubuntu-logo theme
-+ModuleName=ubuntu-text
++Name=Pika Text
++Description=Text mode theme based on pika-logo theme
++ModuleName=pika-text
 +
-+[ubuntu-text]
-+title=Ubuntu 18.04 LTS
++[pika-text]
++title=Pika Plymouth
 +black=0x2c001e
 +white=0xffffff
 +brown=0xff4012
 +blue=0x988592
-Index: plymouth-22.02.122/themes/ubuntu-text/Makefile.am
+Index: plymouth-22.02.122/themes/pika-text/Makefile.am
 ===================================================================
 --- /dev/null
-+++ plymouth-22.02.122/themes/ubuntu-text/Makefile.am
++++ plymouth-22.02.122/themes/pika-text/Makefile.am
 @@ -0,0 +1,4 @@
-+themedir = $(datadir)/plymouth/themes/ubuntu-text
-+dist_theme_DATA = ubuntu-text.plymouth.in
++themedir = $(datadir)/plymouth/themes/pika-text
++dist_theme_DATA = pika-text.plymouth.in
 +
 +MAINTAINERCLEANFILES = Makefile.in
 Index: plymouth-22.02.122/src/plugins/splash/Makefile.am
@@ -62,12 +62,12 @@ Index: plymouth-22.02.122/src/plugins/splash/Makefile.am
 +++ plymouth-22.02.122/src/plugins/splash/Makefile.am
 @@ -1,2 +1,2 @@
 -SUBDIRS = fade-throbber text details space-flares two-step script tribar
-+SUBDIRS = fade-throbber text details space-flares two-step script tribar ubuntu-text
++SUBDIRS = fade-throbber text details space-flares two-step script tribar pika-text
  MAINTAINERCLEANFILES = Makefile.in
-Index: plymouth-22.02.122/src/plugins/splash/ubuntu-text/Makefile.am
+Index: plymouth-22.02.122/src/plugins/splash/pika-text/Makefile.am
 ===================================================================
 --- /dev/null
-+++ plymouth-22.02.122/src/plugins/splash/ubuntu-text/Makefile.am
++++ plymouth-22.02.122/src/plugins/splash/pika-text/Makefile.am
 @@ -0,0 +1,23 @@
 +INCLUDES = -I$(top_srcdir)                                                    \
 +           -I$(srcdir)/../../../libply                                        \
@@ -78,26 +78,26 @@ Index: plymouth-22.02.122/src/plugins/splash/ubuntu-text/Makefile.am
 +           -I$(srcdir)
 +
 +plugindir = $(libdir)/plymouth
-+plugin_LTLIBRARIES = ubuntu-text.la
++plugin_LTLIBRARIES = pika-text.la
 +
-+ubuntu_text_la_CFLAGS = $(PLYMOUTH_CFLAGS)                                           \
++pika_text_la_CFLAGS = $(PLYMOUTH_CFLAGS)                                           \
 +                 -DPLYMOUTH_BACKGROUND_COLOR=$(background_color)              \
 +                 -DPLYMOUTH_BACKGROUND_END_COLOR=$(background_end_color)      \
 +                 -DPLYMOUTH_BACKGROUND_START_COLOR=$(background_start_color)
 +
-+ubuntu_text_la_LDFLAGS = -module -avoid-version -export-dynamic
-+ubuntu_text_la_LIBADD = $(PLYMOUTH_LIBS)                                            \
++pika_text_la_LDFLAGS = -module -avoid-version -export-dynamic
++pika_text_la_LIBADD = $(PLYMOUTH_LIBS)                                            \
 +                 ../../../libply/libply.la                                   \
 +                 ../../../libply-splash-core/libply-splash-core.la
-+ubuntu_text_la_SOURCES = $(srcdir)/plugin.c
++pika_text_la_SOURCES = $(srcdir)/plugin.c
 +
 +MAINTAINERCLEANFILES = Makefile.in
-Index: plymouth-22.02.122/src/plugins/splash/ubuntu-text/plugin.c
+Index: plymouth-22.02.122/src/plugins/splash/pika-text/plugin.c
 ===================================================================
 --- /dev/null
-+++ plymouth-22.02.122/src/plugins/splash/ubuntu-text/plugin.c
++++ plymouth-22.02.122/src/plugins/splash/pika-text/plugin.c
 @@ -0,0 +1,805 @@
-+/* ubuntu-text.c - boot splash plugin
++/* pika-text.c - boot splash plugin
 + *
 + * Copyright (C) 2010 Canonical Ltd.
 + * Copyright (C) 2008 Red Hat, Inc.
@@ -117,7 +117,7 @@ Index: plymouth-22.02.122/src/plugins/splash/ubuntu-text/plugin.c
 + * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 + * 02111-1307, USA.
 + *
-+ * Written by: Scott James Remnant <scott@ubuntu.com>
++ * Written by: Scott James Remnant <scott@pika.com>
 + *             Adam Jackson <ajax@redhat.com>
 + *             Ray Strode <rstrode@redhat.com>
 + */
@@ -431,20 +431,20 @@ Index: plymouth-22.02.122/src/plugins/splash/ubuntu-text/plugin.c
 +  plugin->brown = 0xff4012;
 +  plugin->blue  = 0x988592;
 +
-+  option = ply_key_file_get_value (key_file, "ubuntu-text", "black");
++  option = ply_key_file_get_value (key_file, "pika-text", "black");
 +  if (option)
 +    sscanf(option, "0x%x", &plugin->black);
-+  option = ply_key_file_get_value (key_file, "ubuntu-text", "white");
++  option = ply_key_file_get_value (key_file, "pika-text", "white");
 +  if (option)
 +    sscanf(option, "0x%x", &plugin->white);
-+  option = ply_key_file_get_value (key_file, "ubuntu-text", "brown");
++  option = ply_key_file_get_value (key_file, "pika-text", "brown");
 +  if (option)
 +    sscanf(option, "0x%x", &plugin->brown);
-+  option = ply_key_file_get_value (key_file, "ubuntu-text", "blue");
++  option = ply_key_file_get_value (key_file, "pika-text", "blue");
 +  if (option)
 +    sscanf(option, "0x%x", &plugin->blue);
 +
-+  plugin->title = ply_key_file_get_value (key_file, "ubuntu-text", "title");
++  plugin->title = ply_key_file_get_value (key_file, "pika-text", "title");
 +
 +  return plugin;
 +}

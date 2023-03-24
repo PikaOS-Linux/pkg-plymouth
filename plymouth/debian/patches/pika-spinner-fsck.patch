@@ -5,8 +5,6 @@ Subject: [PATCH] two-step: Add support for fsck status messages
 
 Related to https://gitlab.freedesktop.org/plymouth/plymouth/-/issues/62 but
 not a full solution. Only supports two-step right now.
-
-Bug-Ubuntu: https://bugs.launchpad.net/bugs/1867130
 ---
  src/plugins/splash/two-step/plugin.c | 160 ++++++++++++++++++++++++---
  1 file changed, 146 insertions(+), 14 deletions(-)

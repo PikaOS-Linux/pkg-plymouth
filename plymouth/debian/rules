@@ -69,12 +69,18 @@ override_dh_install:
 	install -D -m 0755 debian/local/plymouth-update-initrd debian/plymouth/usr/libexec/plymouth/plymouth-update-initrd
 	install -D -m 0644 debian/local/plymouth.lsb debian/plymouth/lib/lsb/init-functions.d/99-plymouth
 	install -D -m 0644 debian/local/pika-logo.png debian/plymouth/usr/share/plymouth/pika-logo.png
-	install -D -m 0644 debian/local/ubuntu-logo.png debian/plymouth/usr/share/plymouth/ubuntu-logo.png
 	install -D -m 0644 debian/local/pika-logo.png debian/plymouth/usr/share/plymouth/themes/spinner/watermark.png
 
 	# Adding apport file (from Ubuntu)
 	mkdir -p debian/plymouth/usr/share/apport/package-hooks
 	install -m 644 debian/source_plymouth.apport debian/plymouth/usr/share/apport/package-hooks/source_plymouth.py
+
+	# Install the pika spinner assets
+	cp debian/local/spinner/* debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
+	cp debian/local/entry.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
+	cp debian/local/lock.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
+	cp debian/local/keyboard.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
+	cp debian/local/bgrt-fallback.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
 
 override_dh_installsystemd:
 	dh_installsystemd --no-start --no-restart-after-upgrade

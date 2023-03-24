@@ -9,12 +9,12 @@ details-update-status.patch
 initramfsless-boot.patch
 ubuntu-add-splash-option.patch
 ubuntu-default-devicetimeout.patch
-#ubuntu-spinner-style.patch
-#ubuntu-spinner-fsck.patch
+ubuntu-spinner-style.patch
+ubuntu-spinner-fsck.patch
 plymouth-switch-root-initramfs-Preload-text-renderin.patch
 
 # Ubuntu theme
-#ubuntu-text.patch
+ubuntu-text.patch
 
 # label-ft plugins from opensuse
 labelft-0001-Add-label-ft-plugin.patch
