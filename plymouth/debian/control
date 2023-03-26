@@ -13,7 +13,8 @@ Build-Depends: debhelper-compat (= 12),
                libudev-dev,
                pkg-config,
                systemd,
-               xsltproc
+               xsltproc,
+               fonts-ubuntu
 Standards-Version: 4.6.0
 Rules-Requires-Root: no
 Homepage: http://www.freedesktop.org/wiki/Software/Plymouth
@@ -178,6 +179,7 @@ Depends:
  ${shlibs:Depends},
  plymouth (= ${binary:Version}),
  lsb-release,
+ plymouth-themes-spinner
 Provides: plymouth-theme,
 Description: boot animation, logger and I/O multiplexer - pika text theme
  Plymouth provides a boot-time I/O multiplexing framework - the most obvious
