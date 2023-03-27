@@ -14,7 +14,6 @@ Build-Depends: debhelper-compat (= 12),
                pkg-config,
                systemd,
                xsltproc,
-               fonts-ubuntu
 Standards-Version: 4.6.0
 Rules-Requires-Root: no
 Homepage: http://www.freedesktop.org/wiki/Software/Plymouth
@@ -28,6 +27,7 @@ Depends: init-system-helpers (>= 1.18),
          lsb-base (>= 3.0-6),
          systemd (>= 232-8~),
          udev (>= 232-8~),
+         fonts-ubuntu,
          ${misc:Depends},
          ${shlibs:Depends}
 Conflicts: console-common
