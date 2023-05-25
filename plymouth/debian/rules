@@ -84,6 +84,7 @@ override_dh_install:
 	cp debian/local/bgrt-fallback.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
 	mkdir -p debian/plymouth-theme-spinner/usr/share/initramfs-tools/hooks/
 	cp debian/local/pika-plymouth debian/plymouth-theme-spinner/usr/share/initramfs-tools/hooks/
+	chmod +x debian/plymouth-theme-spinner/usr/share/initramfs-tools/hooks/pika-plymouth
 
 	
 
