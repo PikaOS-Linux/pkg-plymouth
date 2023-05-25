@@ -82,6 +82,10 @@ override_dh_install:
 	cp debian/local/lock.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
 	cp debian/local/keyboard.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
 	cp debian/local/bgrt-fallback.png debian/plymouth-theme-spinner/usr/share/plymouth/themes/spinner
+	mkdir -p debian/plymouth-theme-spinner/usr/share/initramfs-tools/hooks/
+	cp debian/local/pika-plymouth debian/plymouth-theme-spinner/usr/share/initramfs-tools/hooks/
+
+	
 
 override_dh_installsystemd:
 	dh_installsystemd --no-start --no-restart-after-upgrade
