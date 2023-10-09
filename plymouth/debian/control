@@ -92,7 +92,7 @@ Description: graphical boot animation and logger - development files
 Package: plymouth-label
 Architecture: linux-any
 Depends: plymouth (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends},
-         pika-fonts,
+         pop-fonts,
          fontconfig-config,
 Breaks: plymouth-themes (<< 0.9.2-5~)
 Replaces: plymouth-themes (<< 0.9.2-5~)
